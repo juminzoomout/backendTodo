@@ -23,4 +23,6 @@ router.get('/edit_todo', todosController.postEditTodo);
 // todo 삭제
 router.post('/the_todo', todosController.postDeleteTodo);
 
+router.use(todosController.get404);
+
 module.exports = router;

@@ -1,3 +1,7 @@
+const path = require('path');
+
+const Todo = require('../models/todo');
+
 exports.getIndex = (req, res, next) => {
   Todo.findAll()
     .then((todos) => {
@@ -82,4 +86,10 @@ exports.postDeleteTodo = (req, res, next) => {
       res.redirect('/api/the_todo');
     })
     .catch(console.log);
+};
+
+exports.get404 = (req, res, next) => {
+  res
+    .status(404)
+    .sendFile(path.join(__dirname, '../', 'views', 'ejs', '404.html'));
 };
