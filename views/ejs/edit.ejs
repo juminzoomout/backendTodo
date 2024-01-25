@@ -1,0 +1,30 @@
+<%- include('./includes/head.ejs') %>
+
+  </head>
+
+  <%- include('./includes/upside.ejs') %>
+    <main>
+      <form class="product-form" action="/api/<% if (editing) { %>edit_todo<% } else { %>add_todo<% } %>" method="POST">
+        <div class="form-control">
+          <label for="status">진행 상황</label>
+          <!-- type 정해야함 텍스트는 아닌데 저걸 세 개중 하나 어떻게 하지 -->
+          <input type="text" name="status" id="status" value="<% if (editing) { %><%= todo.status %><% } %>">
+        </div>
+        <div class="form-control">
+            <label for="title">할 일</label>
+            <input type="text" name="title" id="title" value="<% if (editing) { %><%= todo.title %><% } %>">
+        </div>
+        <div class="form-control">
+            <label for="description">상세</label>
+            <input type="text" name="description" id="description" value="<% if (editing) { %><%= todo.description %><% } %>">
+        </div>
+
+        <% if (editing) { %>
+            <input type="hidden" value="<%= todo.id %>" name="todoId">
+        <% } %>
+
+        <button class="btn" type="submit"><% if (editing) { %>수정<% } else { %>등록<% } %></button>
+      </form>
+    </main>
+
+  </body>

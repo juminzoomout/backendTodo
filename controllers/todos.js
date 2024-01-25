@@ -5,7 +5,7 @@ const Todo = require('../models/todo');
 exports.getIndex = (req, res, next) => {
   Todo.findAll()
     .then((todos) => {
-      res.render('/api/todos', {
+      res.render('ejs/home', {
         todos: todos,
         path: '/',
       });
@@ -14,8 +14,10 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getAddTodo = (req, res, next) => {
-  res.render('#', {
+  res.render('ejs/edit', {
+    pageTitle: 'Add Todo',
     path: '/api/add_todo',
+    editing: false,
   });
 };
 
@@ -38,7 +40,7 @@ exports.getTodo = (req, res, next) => {
   const todoId = req.params.todoId;
   Todo.findByPk(todoId)
     .then((todo) => {
-      res.render('detail', {
+      res.render('ejs/detail', {
         todo: todo,
         pageTitle: todo.title,
         path: '/the_todo',
@@ -48,14 +50,15 @@ exports.getTodo = (req, res, next) => {
 };
 
 exports.getEditTodo = (req, res, next) => {
+  const editMode = req.query.edit;
   const todoId = req.params.todoId;
   Todo.findByPk(todoId)
     .then((todo) => {
-      res.render('#', {
+      res.render('ejs/edit', {
         pageTitle: 'Edit Todo',
         path: 'api/edit_todo/',
         todo: todo,
-        // editing: editMode,
+        editing: editMode,
       });
     })
     .catch(console.log);
@@ -93,7 +96,5 @@ exports.postDeleteTodo = (req, res, next) => {
 };
 
 exports.get404 = (req, res, next) => {
-  res
-    .status(404)
-    .sendFile(path.join(__dirname, '../', 'views', 'ejs', '404.html'));
+  res.status(404).sendFile(path.join(__dirname, '../', 'views', '404.html'));
 };

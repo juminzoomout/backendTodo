@@ -1,0 +1,22 @@
+<%- include('./includes/head.ejs') %>
+
+  </head>
+
+  <%- include('./includes/upside.ejs') %>
+    <main>
+      <!-- status -->
+      <h1><%= todo.title %></h1>
+      <hr>
+      <p><%= todo.description %></p>
+
+      <div class="card__actions">
+        <a href="/api/edit_todo/<%= todo.id %>?edit=true" class="btn">수정</a>
+        <form action="/api/the_todo" method="POST">
+            <input type="hidden" value="<%= todo.id %>" name="todoId">
+            <button class="btn" type="submit">삭제</button>
+        </form>
+      </div>
+
+    </main>
+
+  </body>
