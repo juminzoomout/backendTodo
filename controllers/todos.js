@@ -20,9 +20,11 @@ exports.getAddTodo = (req, res, next) => {
 };
 
 exports.postAddTodo = (req, res, next) => {
+  const status = NOTSTARTED;
   const title = req.body.title;
   const description = req.body.description;
   Todo.create({
+    status: status,
     title: title,
     description: description,
   })
@@ -61,11 +63,13 @@ exports.getEditTodo = (req, res, next) => {
 
 exports.postEditTodo = (req, res, next) => {
   const todoId = req.body.todoId;
+  const todoStatus = req.body.todoStatus;
   const todoTitle = req.body.title;
   const todoDescription = req.body.description;
   Todo.findByPk(todoId)
     .then((todo) => {
       todo.id = todoId;
+      todo.status = todoStatus;
       todo.title = todoTitle;
       todo.description = todoDescription;
       todo.save();

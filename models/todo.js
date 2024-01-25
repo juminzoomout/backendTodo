@@ -9,7 +9,14 @@ const Todo = sequelize.define('todo', {
     allowNull: false,
     primaryKey: true,
   },
-  title: Sequelize.STRING,
+  status: {
+    type: Sequelize.ENUM('NOTSTARTED', 'PROGRESS', 'DONE'),
+    allowNull: false,
+  },
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   description: Sequelize.STRING,
 });
 
