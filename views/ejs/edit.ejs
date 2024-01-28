@@ -8,7 +8,7 @@
         <div class="form-control">
           <label for="status">진행 상황</label>
           <!-- type 정해야함 텍스트는 아닌데 저걸 세 개중 하나 어떻게 하지 -->
-          <input type="text" name="status" id="status" value="<% if (editing) { %><%= todo.status %><% } %>">
+          <input type="text" name="status" id="status" value="<% if (editing) { %><%= todo.status %><% } else { %>NOTSTARTED<% } %>">
         </div>
         <div class="form-control">
             <label for="title">할 일</label>

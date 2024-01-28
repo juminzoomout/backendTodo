@@ -1,6 +1,6 @@
 const Sequleize = require('sequelize');
 
-const sequelize = new Sequleize('backdend-todo', 'root', 'mdudb^1350', {
+const sequelize = new Sequleize('backend-todo', 'root', 'mdudb^1350', {
   dialect: 'mysql',
   host: 'localhost',
 });

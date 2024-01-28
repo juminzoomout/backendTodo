@@ -7,6 +7,7 @@ exports.getIndex = (req, res, next) => {
     .then((todos) => {
       res.render('ejs/home', {
         todos: todos,
+        pageTitle: 'Todo List',
         path: '/',
       });
     })
@@ -22,7 +23,7 @@ exports.getAddTodo = (req, res, next) => {
 };
 
 exports.postAddTodo = (req, res, next) => {
-  const status = NOTSTARTED;
+  const status = 'NOTSTARTED';
   const title = req.body.title;
   const description = req.body.description;
   Todo.create({
@@ -31,7 +32,7 @@ exports.postAddTodo = (req, res, next) => {
     description: description,
   })
     .then(() => {
-      res.redirect('api/todos');
+      res.redirect('/api/todos');
     })
     .catch(console.log);
 };
@@ -43,7 +44,7 @@ exports.getTodo = (req, res, next) => {
       res.render('ejs/detail', {
         todo: todo,
         pageTitle: todo.title,
-        path: '/the_todo',
+        path: '/api/the_todo',
       });
     })
     .catch(console.log);
@@ -56,7 +57,7 @@ exports.getEditTodo = (req, res, next) => {
     .then((todo) => {
       res.render('ejs/edit', {
         pageTitle: 'Edit Todo',
-        path: 'api/edit_todo/',
+        path: '/api/edit_todo/',
         todo: todo,
         editing: editMode,
       });
@@ -66,7 +67,7 @@ exports.getEditTodo = (req, res, next) => {
 
 exports.postEditTodo = (req, res, next) => {
   const todoId = req.body.todoId;
-  const todoStatus = req.body.todoStatus;
+  const todoStatus = req.body.status;
   const todoTitle = req.body.title;
   const todoDescription = req.body.description;
   Todo.findByPk(todoId)
@@ -78,19 +79,19 @@ exports.postEditTodo = (req, res, next) => {
       todo.save();
     })
     .then(() => {
-      res.redirect('api/the_todo');
+      res.redirect('/api/the_todo/:todoId');
     })
     .catch(console.log);
 };
 
 exports.postDeleteTodo = (req, res, next) => {
-  const todoId = req.params.todoId;
+  const todoId = req.body.todoId;
   Todo.findByPk(todoId)
     .then((todo) => {
       todo.destroy();
     })
     .then(() => {
-      res.redirect('/api/the_todo');
+      res.redirect('/api/todos');
     })
     .catch(console.log);
 };

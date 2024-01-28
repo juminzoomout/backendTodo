@@ -1,0 +1,25 @@
+<%- include('./includes/head.ejs') %>
+
+  </head>
+
+  <%- include('./includes/upside.ejs') %>
+    <main>
+      <% if (todos.length > 0) { %>
+        <div class="grid">
+          <% for (let todo of todos) { %>
+            <article class="card todo-item">
+              <header class="card__header">
+                <h1 class="todo__title"><%= todo.title %></h1>
+              </header>
+              <div class="card__actions">
+                <a href="/api/the_todo/<%= todo.id %>" class="btn">상세</a>
+              </div>
+            </article>
+          <% } %>
+        </div>
+      <% } else { %>
+        <h1>Todo 없음</h1>
+      <% } %>
+    </main>
+
+  </body>

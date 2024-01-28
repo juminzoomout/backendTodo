@@ -13,12 +13,12 @@ router.get('/add_todo', todosController.getAddTodo);
 router.post('/add_todo', todosController.postAddTodo);
 
 // todo 자세히
-router.get('/the_todo', todosController.getTodo);
+router.get('/the_todo/:todoId', todosController.getTodo);
 
 // todo 수정
-router.get('/edit_todo', todosController.getEditTodo);
+router.get('/edit_todo/:todoId', todosController.getEditTodo);
 
-router.get('/edit_todo', todosController.postEditTodo);
+router.post('/edit_todo', todosController.postEditTodo);
 
 // todo 삭제
 router.post('/the_todo', todosController.postDeleteTodo);
