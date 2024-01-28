@@ -4,6 +4,7 @@
 
   <%- include('./includes/upside.ejs') %>
     <main>
+      <button><a href="/api/add_todo/" class="btn">투두 추가</a></button>
       <% if (todos.length > 0) { %>
         <div class="grid">
           <% for (let todo of todos) { %>
